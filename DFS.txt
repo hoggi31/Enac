@@ -1,0 +1,97 @@
+Sure, here's an exercise to learn the DFS algorithm:
+
+You have been given a maze represented as a 2D array of size n by m. Each cell of the maze can be either empty (represented by a . character) or a wall (represented by a # character). The entrance of the maze is at the top-left cell (0, 0), and the exit is at the bottom-right cell (n-1, m-1). You need to find a path from the entrance to the exit using the Depth-First Search (DFS) algorithm.
+
+Write a function dfs(maze) that takes the maze as input and returns a list of tuples representing the path from the entrance to the exit. Each tuple should contain the row and column indices of a cell in the path.
+
+For example, given the following maze:
+
+css
+Copy code
+maze = [    [".", ".", "#", ".", "."],
+    [".", "#", ".", ".", "#"],
+    [".", ".", ".", "#", "."],
+    ["#", ".", "#", ".", "."],
+    [".", ".", ".", ".", "."]
+]
+The function should return the following path:
+
+css
+Copy code
+[(0, 0), (1, 0), (2, 0), (2, 1), (2, 2), (2, 3), (3, 3), (3, 2), (3, 1), (4, 1), (4, 2), (4, 3), (4, 4)]
+Note that there may be multiple valid paths from the entrance to the exit. Your function can return any valid path.
+
+To help you get started, here is the skeleton code for the dfs function:
+
+python
+Copy code
+def dfs(maze):
+    n = len(maze)
+    m = len(maze[0])
+    visited = [[False] * m for _ in range(n)]
+    path = []
+
+    # Define the DFS function
+    def dfs_helper(row, col):
+        # Check if we have reached the exit
+        if row == n - 1 and col == m - 1:
+            # TODO: return the path
+            pass
+
+        # Mark the current cell as visited
+        visited[row][col] = True
+
+        # TODO: Check the neighbors and call dfs_helper on each unvisited neighbor
+
+    # Call the DFS function on the entrance cell
+    dfs_helper(0, 0)
+
+    return path
+Note: Make sure to indicate the TODOs in the code and explain what is needed to be done for each one of them.
+
+
+
+
+
+
+Solution:
+Sure, here is a possible solution for the DFS algorithm exercise:
+
+python
+Copy code
+def dfs(maze):
+    n = len(maze)
+    m = len(maze[0])
+    visited = [[False] * m for _ in range(n)]
+    path = []
+
+    # Define the DFS function
+    def dfs_helper(row, col):
+        # Check if we have reached the exit
+        if row == n - 1 and col == m - 1:
+            path.append((row, col))
+            return True
+
+        # Mark the current cell as visited
+        visited[row][col] = True
+
+        # Check the neighbors and call dfs_helper on each unvisited neighbor
+        for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            r, c = row + dr, col + dc
+            if 0 <= r < n and 0 <= c < m and maze[r][c] != "#" and not visited[r][c]:
+                if dfs_helper(r, c):
+                    path.append((row, col))
+                    return True
+
+        return False
+
+    # Call the DFS function on the entrance cell
+    dfs_helper(0, 0)
+
+    # Reverse the path to get it from entrance to exit
+    path.reverse()
+
+    return path
+In this solution, we define a helper function dfs_helper that takes as input the row and column indices of the current cell. The function first checks if the current cell is the exit, in which case it adds the current cell to the path and returns True. If not, the function marks the current cell as visited and checks each neighbor cell. If a neighbor is unvisited and not a wall, the function recursively calls itself on the neighbor cell. If the recursive call returns True, the function adds the current cell to the path and returns True. If all neighbors have been visited and the exit has not been found, the function returns False.
+
+The dfs function calls the dfs_helper function on the entrance cell (0, 0), and then reverses the path to get it from entrance to exit. The visited list is used to keep track of which cells have already been visited during the DFS traversal.

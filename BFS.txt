@@ -1,0 +1,191 @@
+exercice 1:
+
+
+Bien sûr, voici un exercice pour vous aider à apprendre l'algorithme BFS (Breadth-First Search) :
+
+Supposons que vous avez un graphique non orienté représentant une ville et ses différentes intersections avec des rues reliant ces intersections. Le graphique est représenté sous forme d'une matrice d'adjacence.
+
+Par exemple, supposons que vous ayez le graphique suivant :
+
+lua
+Copy code
+0 -- 1
+|    |
+3 -- 2
+Il est représenté sous forme de matrice d'adjacence comme suit :
+
+Copy code
+  0 1 2 3
+0 0 1 0 1
+1 1 0 1 0
+2 0 1 0 1
+3 1 0 1 0
+L'algorithme BFS commence par visiter un nœud de départ donné. Ensuite, il visite tous les nœuds voisins de ce nœud. Ensuite, il visite tous les nœuds voisins des nœuds visités précédemment, et ainsi de suite, jusqu'à ce que tous les nœuds soient visités.
+
+Voici l'exercice :
+
+Écrivez une fonction bfs qui prend en entrée une matrice d'adjacence graph et un nœud de départ start, et qui retourne l'ordre dans lequel les nœuds ont été visités par l'algorithme BFS.
+
+Appliquez cette fonction à la matrice d'adjacence ci-dessus en utilisant le nœud de départ 0. Vérifiez que l'ordre dans lequel les nœuds ont été visités est 0, 1, 3, 2.
+
+Testez votre fonction avec d'autres matrices d'adjacence pour vous assurer qu'elle fonctionne correctement.
+
+Voici un exemple de code pour la fonction bfs :
+
+python
+Copy code
+def bfs(graph, start):
+    visited = [False] * len(graph)
+    queue = [start]
+    order = []
+    visited[start] = True
+    while queue:
+        node = queue.pop(0)
+        order.append(node)
+        for neighbor in range(len(graph)):
+            if graph[node][neighbor] == 1 and not visited[neighbor]:
+                queue.append(neighbor)
+                visited[neighbor] = True
+    return order
+J'espère que cet exercice vous aidera à mieux comprendre l'algorithme BFS !
+
+
+
+
+exercice 2 
+
+Bien sûr, voici un exercice amusant et un peu fantastique pour vous aider à apprendre l'algorithme BFS :
+
+Supposons que vous êtes un aventurier intrépide qui explore un donjon rempli de pièges et de monstres. Le donjon est représenté sous forme d'un labyrinthe, où chaque case est soit un mur (que vous ne pouvez pas traverser), soit un couloir (que vous pouvez traverser).
+
+Cependant, il y a un twist : certaines cases du labyrinthe sont enchantées et vous transportent instantanément à une autre case du labyrinthe, choisie au hasard.
+
+Le but de l'exercice est d'écrire une fonction bfs qui utilise l'algorithme BFS pour trouver le chemin le plus court entre deux points donnés dans le labyrinthe, en tenant compte des cases enchantées.
+
+Voici les détails :
+
+Le labyrinthe est représenté sous forme d'une matrice, où chaque élément de la matrice est soit un mur (X), soit un couloir (.), soit une case enchantée (E).
+Les positions de départ et d'arrivée sont également données.
+Lorsque vous atteignez une case enchantée, vous êtes instantanément transporté à une autre case du labyrinthe, choisie au hasard. Vous ne pouvez pas contrôler votre destination.
+Vous pouvez vous déplacer horizontalement ou verticalement d'une case à une autre, mais pas en diagonale.
+La fonction doit retourner le chemin le plus court entre les deux points donnés, sous forme d'une liste de coordonnées (une paire de nombres représentant les coordonnées de ligne et de colonne de chaque case du chemin).
+Si un chemin n'existe pas entre les deux points, la fonction doit retourner None.
+Voici un exemple de labyrinthe :
+
+Copy code
+X.XXXX.
+X.....E
+XXXXXX.
+.......
+E......
+.X.XXXX
+Dans ce labyrinthe, les murs sont représentés par X, les couloirs par . et les cases enchantées par E. Supposons que vous cherchiez le chemin le plus court entre la case (1, 1) (en haut à gauche) et la case (4, 5) (en bas à droite). Le résultat devrait être le chemin suivant :
+
+css
+Copy code
+[(1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (4, 3), (4, 4), (4, 5)]
+Voici un exemple de code pour la fonction bfs :
+
+sql
+Copy code
+import random
+
+def bfs(maze, start, end):
+    queue = [(start, [start])]
+    visited = set()
+    while queue:
+        (current_row, current_col), path = queue.pop(0)
+        if (current_row, current_col) == end:
+            return path
+        if (current_row, current_col) not in visited:
+            visited.add((current_row, current_col))
+            for (row_offset, col_offset) in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+                neighbor_row = current_row + row_offset
+                neighbor_col = current_col + col_offset
+                if (0 <= neighbor_row < len(maze) and
+                        0 <= neighbor_col < len(maze[0]) and
+						
+						
+						
+						
+Exercise 2:
+
+Suppose you are a brave adventurer exploring a dungeon filled with traps and monsters. The dungeon is represented as a maze, where each square is either a wall (which you cannot pass through) or a corridor (which you can pass through).
+
+However, there is a twist: some squares in the maze are enchanted and instantly transport you to another square in the maze, chosen at random.
+
+The goal of the exercise is to write a function bfs that uses the BFS algorithm to find the shortest path between two given points in the maze, taking into account the enchanted squares.
+
+Here are the details:
+
+The maze is represented as a matrix, where each element of the matrix is either a wall (X), a corridor (.), or an enchanted square (E).
+The starting and ending positions are also given.
+When you reach an enchanted square, you are instantly transported to another square in the maze, chosen at random. You cannot control your destination.
+You can move horizontally or vertically from one square to another, but not diagonally.
+The function should return the shortest path between the two points given, as a list of coordinates (a pair of numbers representing the row and column coordinates of each square in the path).
+If a path does not exist between the two points, the function should return None.
+And here is an example maze:
+
+Copy code
+X.XXXX.
+X.....E
+XXXXXX.
+.......
+E......
+.X.XXXX
+In this maze, walls are represented by X, corridors by ., and enchanted squares by E. Suppose you are looking for the shortest path between the square (1, 1) (top-left) and the square (4, 5) (bottom-right). The result should be the following path:
+
+css
+Copy code
+[(1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (4, 3), (4, 4), (4, 5)]
+Here is an example code for the bfs function:
+
+sql
+Copy code
+import random
+
+def bfs(maze, start, end):
+    queue = [(start, [start])]
+    visited = set()
+    while queue:
+        (current_row, current_col), path = queue.pop(0)
+        if (current_row, current_col) == end:
+            return path
+        if (current_row, current_col) not in visited:
+            visited.add((current_row, current_col))
+            for (row_offset, col_offset) in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+                neighbor_row = current_row + row_offset
+                neighbor_col = current_col + col_offset
+                if (0 <= neighbor_row < len(maze) and
+                        0 <= neighbor_col < len(maze[0]) and
+                        maze[neighbor_row][neighbor_col] != 'X' and
+                        (neighbor_row, neighbor_col) not in visited):
+                    if maze[neighbor_row][neighbor_col] == 'E':
+                        # If the neighbor is an enchanted square, randomly teleport to another square
+                        teleport_row, teleport_col = teleport(maze, visited)
+                        queue.append(((teleport_row, teleport_col), path + [(teleport_row, teleport_col)]))
+                    else:
+                        # Otherwise, add the neighbor to the queue
+                        queue.append(((neighbor_row, neighbor_col), path + [(neighbor_row, neighbor_col)]))
+    # If no path was found, return None
+    return None
+
+def teleport(maze, visited):
+    # Find a random square that is not a wall or a visited square
+    while True:
+        teleport_row = random.randint(0, len(maze) - 1)
+        teleport_col = random.randint(0, len(maze[0]) - 1)
+        if maze[teleport_row][teleport_col] != 'X' and (teleport_row, teleport_col) not in visited:
+            return teleport_row, teleport_col
+			
+			
+			
+The bfs function uses a queue to perform a breadth-first search of the maze, starting from the start position and searching for the end position. The visited set keeps track of which squares have already been visited to avoid revisiting them.
+
+When exploring a square, if it is an enchanted square ('E'), the function uses the teleport function to randomly choose another square to teleport to, and adds that square to the queue with the updated path.
+
+If the square is not an enchanted square, the function simply adds its neighbors to the queue with the updated path.
+
+If no path is found between start and end, the function returns None.
+
+Note that the teleport function chooses a random square that is not a wall or a visited square. This is done to avoid getting stuck in an infinite loop if all reachable squares have already been visited.
